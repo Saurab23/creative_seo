@@ -5,8 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Creative Seo</title>
+    <meta name="description" content="Meta Description">
+    <meta name="keywords" content="Meta Description">
+    <meta name="robots" content="index, follow">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="{{ asset('css/frontend-style.css') }}">
 </head>
 
@@ -16,10 +20,10 @@
     <nav class="navigation navbar navbar-expand-lg bg-light shadow-sm sticky-top">
         <div class="container">
             <button class="side-navbar-open-btn me-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMySidenav" aria-controls="offcanvasMySidenav">
-                <i class="bi bi-text-left"></i>
+                <i class="fa-solid fa-align-left"></i>
             </button>
             <a class="navbar-brand" href="{{ route('index') }}">
-                <h5 class="mb-0">Creative SEO</h5>
+                <h5 class="mb-0">Creative Seo</h5>
             </a>
             <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -34,10 +38,13 @@
                         <a class="nav-link" href="{{ route('article.category.view',$cat->slug) }}">{{ $cat->category_name }}</a>
                     </li>
                     @endforeach
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('biography.index') }}">Biography</a>
+                    </li>
                 </ul>
             </div>
             <div id="navigation-search-hook">
-                <i id="navigatin-search-icon" class="bi bi-search"></i>
+                <i id="navigatin-search-icon" class="fa-solid fa-magnifying-glass"></i>
             </div>
             <div id="navigation-search-form" class="border-1 clearfix" style="display: none;">
                 <form method="get" action="">
@@ -63,6 +70,9 @@
                 @foreach($cate as $cat)
                 <li class="nav-item"><a href="{{ route('article.category.view',$cat->slug) }}" class="nav-link">{{ $cat->category_name}}</a></li>
                 @endforeach
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('biography.index') }}">Biography</a>
+                </li>
             <hr>
                 <li class="nav-item"><a href="#" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Privacy Policy</a></li>
@@ -71,7 +81,7 @@
         </div>
     </div>
     <!-- Sidebar Menu End -->
-    
+
     @yield('content')
 
     <!-- Footer Start -->
@@ -91,12 +101,13 @@
                         </div>
                     </div>
                     <ul class="footer-social d-flex justify-content-center align-items-center list-unstyled mb-3">
-                        <li><a href="facebook.com"><i class="bi bi-facebook"></i></a></li>
-                        <li><a href="twitter.com"><i class="bi bi-twitter"></i></a></li>
-                        <li><a href="instagra.com"><i class="bi bi-instagram"></i></a></li>
-                        <li><a href="youtube.com"><i class="bi bi-youtube"></i></a></li>
+                        <li><a href="facebook.com"><i class="fa-brands fa-facebook-f"></i></a></li>
+                        <li><a href="twitter.com"><i class="fa-brands fa-twitter"></i></a></li>
+                        <li><a href="instagra.com"><i class="fa-brands fa-instagram"></i></a></li>
+                        <li><a href="youtube.com"><i class="fa-brands fa-youtube"></i></a></li>
                     </ul>
                     <ul class="footer-menu d-flex justify-content-center align-items-center list-unstyled mb-3">
+                        <li><a href="">Home</a></li>
                         <li><a href="">Married</a></li>
                         <li><a href="">Dating</a></li>
                         <li><a href="">Relationship</a></li>
@@ -104,7 +115,7 @@
                         <li><a href="">Biography</a></li>
                     </ul>
                     <div class="footer-copyright text-center">
-                        <p class="mb-0 text-muted">Copyright &copy; 2022 Creative Seo. All Rights Reserved.</p>
+                        <p class="mb-0 text-muted">Copyright &copy; 2022 Blog Name. All Rights Reserved.</p>
                     </div>
                 </div>
             </div>
@@ -112,9 +123,11 @@
     </footer>
     <!-- Footer End -->
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js " integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin=" anonymous "></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js "></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('js/frontend-main.js') }}"></script>
+    <script src="{{ asset('js/ResizeSensor.js') }}"></script>
+    <script src="{{ asset('js/jquery.sticky-sidebar.js') }}"></script>
 </body>
 
 </html>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Biography;
 use App\QuickFact;
+use App\TableOfContent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyArticleRequest;
 use App\Http\Requests\StoreArticleRequest;
@@ -83,13 +84,6 @@ class BiographyController extends Controller
 
     }
 
-    // public function QuickFacts($id){
-
-    //     $quickFact= QuickFact::where('id', $id)->get();
-    //     dd($quickFact);
-
-    // }
-
     public function QuickFacts($id)
     {
 
@@ -112,6 +106,41 @@ class BiographyController extends Controller
        
         $quickFact = QuickFact::where('id', $request->get('id'))->first();
         $quickFact->delete();
+        return response()->json(['type' => 'success', 'message' => "Successfully Deleted"]);
+    }
+
+    public function insertTableOfContent(Request $request){
+
+        $tableOfContent = new TableOfContent();
+        $tableOfContent->biography_Id = $request->input('articleid');
+        $tableOfContent->question = $request->input('question');
+        $tableOfContent->answer = $request->input('answer');
+        $tableOfContent->save();
+
+    }
+
+    public function TableOfContents($id)
+    {
+
+        $tableOfContent= TableOfContent::where('biography_id', $id)->get();
+        
+        return Datatables::of($tableOfContent)
+        ->addColumn('action', function ($user) {
+            $html = '<div class="btn-group">';
+            $html .= '<a data-toggle="tooltip" href="#" id="' . $user->id . '" class="btn btn-xs btn-info mr-1 delete" title="delete"><i class="fa fa-trash"></i> </a>';
+
+            $html .= '</div>';
+            return $html;
+        })
+        ->rawColumns(['action'])
+            ->addIndexColumn()
+            ->make(true);
+    }
+
+    public function TableOfContentsDelete(Request $request){
+       
+        $tableOfContent = TableOfContent::where('id', $request->get('id'))->first();
+        $tableOfContent->delete();
         return response()->json(['type' => 'success', 'message' => "Successfully Deleted"]);
     }
 }

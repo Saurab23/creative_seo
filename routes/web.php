@@ -21,6 +21,8 @@ Route::get('/', 'FrontendController@index')->name('index');
 Route::get('{slug}', 'FrontendController@viewDetail')->name('article.viewDetail');
 Route::get('/article-category/{slug}', 'FrontendController@category_wise_article')->name('article.category.view');
 
+Route::get('/biography/index', 'FrontendController@biographyIndex')->name('biography.index');
+
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/dashboard', 'HomeController@index')->name('home');
     // Permissions
@@ -51,9 +53,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
      Route::get('/biography', 'BiographyController@index')->name('biography.index');
      Route::resource('biography', 'BiographyController');
 
+     //Biography Quick Facts
      Route::get('biography/quickfacts/{id}', 'BiographyController@QuickFacts')->name('biography.quickfact');
      Route::post('biography/quickfact/delete', 'BiographyController@QuickFactsDelete')->name('biography.quickfact.delete');
      Route::post('biography/insertQuickFact', 'BiographyController@insertQuickFact')->name('biography.insertQuickFact');
+
+    //Biography Table Of Content
+     Route::get('biography/tableofContent/{id}', 'BiographyController@TableOfContents')->name('biography.tableofContent');
+     Route::post('biography/tableofContent/delete', 'BiographyController@TableOfContentsDelete')->name('biography.tableofContent.delete');
+     Route::post('biography/inserttableofContent', 'BiographyController@insertTableOfContent')->name('biography.inserttableofContent');
      
 
     

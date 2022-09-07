@@ -10,6 +10,7 @@
     </div>
 @endcan
   
+{{-- Quick Facts Starts Here --}}
   <!-- The Modal -->
   <div class="modal" id="myModal">
     <div class="modal-dialog modal-lg">
@@ -70,7 +71,69 @@
       </div>
     </div>
   </div>
+{{-- Quick Facts ends here --}}
 
+
+{{-- Table of content starts here --}}
+  <div class="modal" id="myModal1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">ADD Table of Content</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="card-body">
+                <div class="table-responsive">
+                        <table id="manage_all1" class=" table table-bordered table-striped table-hover datatable">
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Question</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                        </table>
+                </div>
+            </div>
+            <form id='createTOC' action="" enctype="multipart/form-data" method="post" accept-charset="utf-8" class="needs-validation" novalidate>
+                <div class="form-row">
+                    <div id="status"></div>
+                    <input type="text"  class="form-control" id="articleid" name="articleid" value="" placeholder="" hidden required>
+                    <div class="form-group col-md-12 col-sm-12">
+                        <label for=""> Question <span style="color:red">*</span> </label>
+                        <input type="text"  class="form-control" id="question" name="question" value="" placeholder="" required>
+                        <span id="error_name" class="has-error"></span>
+                    </div>
+                    <div class="form-group col-md-12 col-sm-12">
+                        <label for=""> Answer </label>
+                        <textarea type="text" class="ckeditor form-control" id="answer" name="answer" value="" placeholder="" ></textarea>
+                        <span id="error_name" class="has-error"></span>
+                    </div>
+                    
+                    <div class="clearfix"></div>
+                    <div class="col-md-12">
+                        <button id="submit" type="button" class="btn btn-success button-submit" onclick="submitTableOfContent()"
+                                data-loading-text="Loading..."><span class="fa fa-save fa-fw"></span> Save
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+{{-- Table of content starts here --}}
 
 <div class="card">
     <div class="card-header">
@@ -158,6 +221,9 @@
                                 <button class="btn btn-xs btn-info" data-toggle="modal" data-val="{{$article->id}}" name="addModel" id="addModel" data-target="#myModal" data-id="{{$article->id}}">
                                     Add QF
                                 </button>
+                                <button class="btn btn-xs btn-info" data-toggle="modal" data-val="{{$article->id}}" name="addModel1" id="addModel1" data-target="#myModal1" data-id="{{$article->id}}">
+                                    Add TOC
+                                </button>
 
                             </td>
 
@@ -172,6 +238,7 @@
 @section('scripts')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
+{{-- quickfacts ko scripts starts --}}
 <script>
   
      $(document).ready(function () {
@@ -216,6 +283,7 @@ function submitQuickFact() {
     // var myData = new FormData($("#create")[0]);
    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
    var articleId = $('#articleid').val();
+   //alert(articleId);
    var title = $('#title').val();
    var content = $('#content').val();
     //             // myData.append('_token', CSRF_TOKEN);
@@ -233,7 +301,8 @@ function submitQuickFact() {
         type: 'post',
         success: function()
         {
-            document.getElementById("create").reset();
+            $('[name="title"]').val('');
+            $('[name="content"]').val('');
             table = $("#manage_all").DataTable();
                 table.ajax.reload(null, false); 
         }
@@ -264,5 +333,113 @@ function submitQuickFact() {
             
         });
    
+    });
+</script>
+
+{{-- quickfacts ko scripts end --}}
+
+{{-- table of content ko scripts starts --}}
+<script>
+  
+    $(document).ready(function () {
+       $('#myModal1').on('show.bs.modal', function (event) {
+           var myVal = $(event.relatedTarget).data('val');
+           $(this).find(".articleid").val(myVal);
+ $("#articleid").val(myVal);
+
+ var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+ var url = "{!! url('/admin/biography/tableofContent') !!}"
+       table = $('#manage_all1').DataTable({
+           processing: true,
+           serverSide: true,
+           ajax: {
+               "url": url+"/"+myVal,
+               "type": "GET",
+               headers: {
+                   "X-CSRF-TOKEN": CSRF_TOKEN,
+               },
+               "dataType": 'json'
+           },
+      
+           columns: [
+               {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
+               {data: 'question', name: 'answer'},               
+               {data: 'action', name: 'action'}
+           ],
+           "autoWidth": false,
+       });
+       $('.dataTables_filter input[type="search"]').attr('placeholder', 'Type here to search...').css({
+           'width': '220px',
+           'height': '30px'
+       });
+});
+
+});
+
+function submitTableOfContent() {
+
+   // var myData = new FormData($("#create")[0]);
+  var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+  var articleId = $('#articleid').val();
+  var question = $('#question').val();  
+  var answer = CKEDITOR.instances['answer'].getData();
+
+   //             // myData.append('_token', CSRF_TOKEN);
+   //             alert(JSON.stringify(myData));
+               var myData = {
+                   '_token' : CSRF_TOKEN,
+                   'articleid' : articleId,
+                   'question' : question,
+                   'answer' : answer,
+               };
+            
+   $.ajax({ 
+       url: "{{ route('admin.biography.inserttableofContent') }}",
+       data: myData,
+       type: 'post',
+       success: function()
+       {
+           $('[name="question"]').val('');
+           CKEDITOR.instances.answer.setData(''); 
+           table = $("#manage_all1").DataTable();
+               table.ajax.reload(null, false); 
+       }
+   });
+
+}
+</script>
+<script type="text/javascript">
+
+   $(document).ready(function () {
+      
+   $("#manage_all1").on("click", ".delete", function () {
+           var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+           var id = $(this).attr('id');
+     
+               $.ajax({
+                   url: "{{ route('admin.biography.tableofContent.delete') }}",
+                   data: {"_token": CSRF_TOKEN,'id':id},
+                  
+                   type: 'POST',
+                   dataType: 'json',
+                   success: function(res) {
+                   
+                       table = $("#manage_all1").DataTable();
+                           table.ajax.reload(null, false); 
+                   }
+               });
+           
+       });
+  
+   });
+</script>
+
+{{-- table of content ko scripts end --}}
+
+
+<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+       $('.ckeditor').ckeditor();
     });
 </script>

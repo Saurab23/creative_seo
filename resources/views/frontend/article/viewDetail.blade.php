@@ -53,9 +53,10 @@
                     </div>
                     <div class="blog-single-post-tags">
                         Tags:
-                        @foreach($article->tags as $tags)
-                        <a class='btn btn-outline-danger' href="#" rel="tag">{{ $tags->tag_name}}</a>
-                        @endforeach
+                        <a href="#" rel="tag">beauty</a>
+                        <a href="#" rel="tag">carousel</a>
+                        <a href="#" rel="tag">hair</a>
+                        <a href="#" rel="tag">style</a>
                     </div>
                     <div class="blog-single-post-related py-4">
                         <div class="row">
@@ -66,85 +67,225 @@
                             </div>
                         </div>
                         <div class="row row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-lg-3">
-                            @foreach($allArticle as $data)
                             <div class="col">
                                 <article class="recent-post-item mb-4 mb-sm-4 mb-md-md-0 mb-lg-0 shadow">
                                     <div class="recent-post-item-thumb zoom image is-4by5">
                                         <a href="#">
-                                            <img src="{{ (!empty($data->featured_photo))?url('uploads/article-featured-image/'.$data->featured_photo):url('uploads/no-image.png') }}" class="img-fluid" alt="Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!">
+                                            <img src="./img/Brooklyn-Beckham.jpg" class="img-fluid" alt="Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!">
                                         </a>
                                         <div class="recent-post-item-cat">
-                                            <a href="#">{{ $data->categories[0]->category_name}}</a>
+                                            <a href="#">BFF Goals</a>
                                         </div>
                                     </div>
                                     <div class="recent-post-item-main">
-                                        <h4 class="recent-post-item-title"><a href="#">{{$data->title}}</a></h4>
+                                        <h4 class="recent-post-item-title"><a href="#">Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!</a></h4>
                                     </div>
                                 </article>
                             </div>
-                            @endforeach
+                            <div class="col">
+                                <article class="recent-post-item mb-4 mb-sm-4 mb-md-md-0 mb-lg-0 shadow">
+                                    <div class="recent-post-item-thumb zoom image is-4by5">
+                                        <a href="#">
+                                            <img src="./img/Brooklyn-Beckham.jpg" class="img-fluid" alt="Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!">
+                                        </a>
+                                        <div class="recent-post-item-cat">
+                                            <a href="#">BFF Goals</a>
+                                        </div>
+                                    </div>
+                                    <div class="recent-post-item-main">
+                                        <h4 class="recent-post-item-title"><a href="#">Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!</a></h4>
+                                    </div>
+                                </article>
+                            </div>
+                            <div class="col">
+                                <article class="recent-post-item mb-4 mb-sm-4 mb-md-md-0 mb-lg-0 shadow">
+                                    <div class="recent-post-item-thumb zoom image is-4by5">
+                                        <a href="#">
+                                            <img src="./img/Brooklyn-Beckham.jpg" class="img-fluid" alt="Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!">
+                                        </a>
+                                        <div class="recent-post-item-cat">
+                                            <a href="#">BFF Goals</a>
+                                        </div>
+                                    </div>
+                                    <div class="recent-post-item-main">
+                                        <h4 class="recent-post-item-title"><a href="#">Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!</a></h4>
+                                    </div>
+                                </article>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="co1-12 col-sm-12 col-md-4 col-lg-4">
-                    <div class="blog-single-post-sidebar">
-                        <section class="blog-sidebar-cat blog-sidebar-cat-1">
-                            <div class="section-header">
-                                <h3 class="section-title">Entertainment</h3>
-                            </div>
-                            <div class="blog-sidebar-cat-list">
-                                <article class="blog-sidebar-cat-content d-flex mb-4">
-                                    <div class="blog-sidebar-cat-thumb zoom">
-                                        <img src="./img/Brooklyn-Beckham.jpg" alt="Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!" class="img-fluid">
-                                    </div>
-                                    <div class="blog-sidebar-cat-main">
-                                        <h4 class="blog-sidebar-cat-title"><a href="">Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!</a></h4>
-                                        <div class="blog-sidebar-cat-meta">
-                                            <span class="blog-sidebar-cat-meta-author me-2"><i class="bi bi-person me-1"></i>admin</span>
-                                            <span class="blog-sidebar-cat-meta-date"><i class="bi bi-clock me-1"></i>August 15, 2022</span>
+                    <div id="singleSidebar" class="sidebar-section single-sidebar">
+                        <div class="blog-single-post-sidebar sidebar-inner">
+                            <section class="blog-sidebar-cat blog-sidebar-cat-1">
+                                <div class="section-header">
+                                    <h3 class="section-title">Entertainment</h3>
+                                </div>
+                                <div class="blog-sidebar-cat-list">
+                                    <article class="blog-sidebar-cat-content d-flex mb-4">
+                                        <div class="blog-sidebar-cat-thumb zoom">
+                                            <img src="./img/Brooklyn-Beckham.jpg" alt="Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!" class="img-fluid">
+                                        </div>
+                                        <div class="blog-sidebar-cat-main">
+                                            <h4 class="blog-sidebar-cat-title"><a href="">Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!</a></h4>
+                                            <div class="blog-sidebar-cat-meta">
+                                                <span class="blog-sidebar-cat-meta-author me-2"><i class="fa-solid fa-user me-1"></i>admin</span>
+                                                <span class="blog-sidebar-cat-meta-date"><i class="fa-solid fa-clock me-1"></i>August 15, 2022</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                    <article class="blog-sidebar-cat-content d-flex mb-4">
+                                        <div class="blog-sidebar-cat-thumb zoom">
+                                            <img src="./img/Brooklyn-Beckham.jpg" alt="Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!" class="img-fluid">
+                                        </div>
+                                        <div class="blog-sidebar-cat-main">
+                                            <h4 class="blog-sidebar-cat-title"><a href="">Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!</a></h4>
+                                            <div class="blog-sidebar-cat-meta">
+                                                <span class="blog-sidebar-cat-meta-author me-2"><i class="fa-solid fa-user me-1"></i>admin</span>
+                                                <span class="blog-sidebar-cat-meta-date"><i class="fa-solid fa-clock me-1"></i>August 15, 2022</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                    <article class="blog-sidebar-cat-content d-flex mb-4">
+                                        <div class="blog-sidebar-cat-thumb zoom">
+                                            <img src="./img/Brooklyn-Beckham.jpg" alt="Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!" class="img-fluid">
+                                        </div>
+                                        <div class="blog-sidebar-cat-main">
+                                            <h4 class="blog-sidebar-cat-title"><a href="">Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!</a></h4>
+                                            <div class="blog-sidebar-cat-meta">
+                                                <span class="blog-sidebar-cat-meta-author me-2"><i class="fa-solid fa-user me-1"></i>admin</span>
+                                                <span class="blog-sidebar-cat-meta-date"><i class="fa-solid fa-clock me-1"></i>August 15, 2022</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                    <article class="blog-sidebar-cat-content d-flex mb-4">
+                                        <div class="blog-sidebar-cat-thumb zoom">
+                                            <img src="./img/Brooklyn-Beckham.jpg" alt="Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!" class="img-fluid">
+                                        </div>
+                                        <div class="blog-sidebar-cat-main">
+                                            <h4 class="blog-sidebar-cat-title"><a href="">Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!</a></h4>
+                                            <div class="blog-sidebar-cat-meta">
+                                                <span class="blog-sidebar-cat-meta-author me-2"><i class="fa-solid fa-user me-1"></i>admin</span>
+                                                <span class="blog-sidebar-cat-meta-date"><i class="fa-solid fa-clock me-1"></i>August 15, 2022</span>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </div>
+                            </section>
+                            <section class="blog-sidebar-biography">
+                                <div class="section-header d-flex justify-content-between align-items-center">
+                                    <h3 class="section-title"><a href="#">Biography</a></h3>
+                                    <h3 class="section-view-more"><a href="#">View More</a></h3>
+                                </div>
+                                <div class="blog-sidebar-biography-list">
+                                    <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 py-2">
+                                        <div class="col">
+                                            <article class="blog-sidebar-biography-item mb-4">
+                                                <div class="blog-item-thumb zoom image is-1by1">
+                                                    <a href="">
+                                                        <img src="./img/Lou-Diamond-Phillips.jpg" alt="" class="img-fluid">
+                                                    </a>
+                                                    <div class="ribbon-item">
+                                                        <div class="ribbon-item-inner">
+                                                            Married
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="blog-item-main text-center text-center">
+                                                    <h4 class="blog-item-title py-2"><a href="">Lou Diamond Phillips</a></h4>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <div class="col">
+                                            <article class="blog-sidebar-biography-item mb-4">
+                                                <div class="blog-item-thumb zoom image is-1by1">
+                                                    <a href="">
+                                                        <img src="./img/Lou-Diamond-Phillips.jpg" alt="" class="img-fluid">
+                                                    </a>
+                                                    <div class="ribbon-item">
+                                                        <div class="ribbon-item-inner">
+                                                            Single
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="blog-item-main text-center text-center">
+                                                    <h4 class="blog-item-title py-2"><a href="">Lou Diamond Phillips</a></h4>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <div class="col">
+                                            <article class="blog-sidebar-biography-item mb-4">
+                                                <div class="blog-item-thumb zoom image is-1by1">
+                                                    <a href="">
+                                                        <img src="./img/Lou-Diamond-Phillips.jpg" alt="" class="img-fluid">
+                                                    </a>
+                                                    <div class="ribbon-item">
+                                                        <div class="ribbon-item-inner">
+                                                            Married
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="blog-item-main text-center text-center">
+                                                    <h4 class="blog-item-title py-2"><a href="">Lou Diamond Phillips</a></h4>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <div class="col">
+                                            <article class="blog-sidebar-biography-item mb-4">
+                                                <div class="blog-item-thumb zoom image is-1by1">
+                                                    <a href="">
+                                                        <img src="./img/Lou-Diamond-Phillips.jpg" alt="" class="img-fluid">
+                                                    </a>
+                                                    <div class="ribbon-item">
+                                                        <div class="ribbon-item-inner">
+                                                            Married
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="blog-item-main text-center text-center">
+                                                    <h4 class="blog-item-title py-2"><a href="">Lou Diamond Phillips</a></h4>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <div class="col">
+                                            <article class="blog-sidebar-biography-item mb-4">
+                                                <div class="blog-item-thumb zoom image is-1by1">
+                                                    <a href="">
+                                                        <img src="./img/Lou-Diamond-Phillips.jpg" alt="" class="img-fluid">
+                                                    </a>
+                                                    <div class="ribbon-item">
+                                                        <div class="ribbon-item-inner">
+                                                            Married
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="blog-item-main text-center text-center">
+                                                    <h4 class="blog-item-title py-2"><a href="">Lou Diamond Phillips</a></h4>
+                                                </div>
+                                            </article>
+                                        </div>
+                                        <div class="col">
+                                            <article class="blog-sidebar-biography-item mb-4">
+                                                <div class="blog-item-thumb zoom image is-1by1">
+                                                    <a href="">
+                                                        <img src="./img/Lou-Diamond-Phillips.jpg" alt="" class="img-fluid">
+                                                    </a>
+                                                    <div class="ribbon-item">
+                                                        <div class="ribbon-item-inner">
+                                                            Single
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="blog-item-main text-center text-center">
+                                                    <h4 class="blog-item-title py-2"><a href="">Lou Diamond Phillips</a></h4>
+                                                </div>
+                                            </article>
                                         </div>
                                     </div>
-                                </article>
-                                <article class="blog-sidebar-cat-content d-flex mb-4">
-                                    <div class="blog-sidebar-cat-thumb zoom">
-                                        <img src="./img/Brooklyn-Beckham.jpg" alt="Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!" class="img-fluid">
-                                    </div>
-                                    <div class="blog-sidebar-cat-main">
-                                        <h4 class="blog-sidebar-cat-title"><a href="">Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!</a></h4>
-                                        <div class="blog-sidebar-cat-meta">
-                                            <span class="blog-sidebar-cat-meta-author me-2"><i class="bi bi-person me-1"></i>admin</span>
-                                            <span class="blog-sidebar-cat-meta-date"><i class="bi bi-clock me-1"></i>August 15, 2022</span>
-                                        </div>
-                                    </div>
-                                </article>
-                                <article class="blog-sidebar-cat-content d-flex mb-4">
-                                    <div class="blog-sidebar-cat-thumb zoom">
-                                        <img src="./img/Brooklyn-Beckham.jpg" alt="Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!" class="img-fluid">
-                                    </div>
-                                    <div class="blog-sidebar-cat-main">
-                                        <h4 class="blog-sidebar-cat-title"><a href="">Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!</a></h4>
-                                        <div class="blog-sidebar-cat-meta">
-                                            <span class="blog-sidebar-cat-meta-author me-2"><i class="bi bi-person me-1"></i>admin</span>
-                                            <span class="blog-sidebar-cat-meta-date"><i class="bi bi-clock me-1"></i>August 15, 2022</span>
-                                        </div>
-                                    </div>
-                                </article>
-                                <article class="blog-sidebar-cat-content d-flex mb-4">
-                                    <div class="blog-sidebar-cat-thumb zoom">
-                                        <img src="./img/Brooklyn-Beckham.jpg" alt="Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!" class="img-fluid">
-                                    </div>
-                                    <div class="blog-sidebar-cat-main">
-                                        <h4 class="blog-sidebar-cat-title"><a href="">Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!</a></h4>
-                                        <div class="blog-sidebar-cat-meta">
-                                            <span class="blog-sidebar-cat-meta-author me-2"><i class="bi bi-person me-1"></i>admin</span>
-                                            <span class="blog-sidebar-cat-meta-date"><i class="bi bi-clock me-1"></i>August 15, 2022</span>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                        </section>
-                        <section class="blog-sidebar-biography">
-                        </section>
+                                </div>
+                            </section>
+                        </div>
                     </div>
                 </div>
             </div>
