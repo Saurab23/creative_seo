@@ -23,16 +23,12 @@ class FrontendController extends Controller
         $articles = Article::with('articleUser')->latest('created_at')->get()->take(4);
         $categories = Category::all();
         $user = User::all();
-        $biography = Biography::all();
+        $biography = Biography::latest('created_at')->get();
         $dtonemonth = Carbon::now()->addMonth();
 
         $today_anniversary = Biography::whereMonth('anniversary_date', '=', Carbon::now()->format('m'))->whereDay('anniversary_date', '=', Carbon::now()->format('d'))->get()->take(6);
         $upcoming_anniversary = DB::select("SELECT * FROM biographies  WHERE dayofyear(anniversary_date) - dayofyear(curdate()) between 1 and 10  or dayofyear(anniversary_date) + 365 - dayofyear(curdate()) between 1 and 10");
-        // Biography::whereMonth('anniversary_date', '>', dtonemonth->format('m'))->whereDay('anniversary_date', '', Carbon::now()->addDays(7)->format('d'))->get();
-        
-        
-        
-     //   dd($upcoming_anniversary);
+
         return view('frontend.article.index', compact('articles', 'categories', 'user', 'biography', 'today_anniversary', 'upcoming_anniversary'));
     
     }
@@ -82,7 +78,12 @@ class FrontendController extends Controller
         $biography = Biography::where('slug', $slug)->first();
         $biography->tableofcontent = TableOfContent::where('biography_id',$biography->id)->get();
         $biography->quickfact = QuickFact::where('biography_id',$biography->id)->get();
-        return view('frontend.biography.biographyDetail', compact('biography'));
+
+        $recent_biography = Biography::latest('created_at')->get();
+        $sidebar_biography = Biography::latest('created_at')->get()->take(6);
+
+        
+        return view('frontend.biography.biographyDetail', compact('biography', 'recent_biography', 'sidebar_biography'));
     }
 
 }

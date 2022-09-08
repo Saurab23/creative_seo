@@ -73,6 +73,36 @@ class BiographyController extends Controller
         return view('admin.biography.edit', compact('biography', 'tags'));
     }
 
+    public function update(Request $request, $id)
+    {
+
+        $biography = Biography::findOrFail($id);
+        /* start image part */
+        if ($request->hasFile('biography_photo')) {
+            $file = $request->file('biography_photo');
+            @unlink(public_path('uploads/biography-image'.$article->biography_photo));
+            $biography_photo = 'biography_photo'.md5(mt_rand(11111111,99999999)).'.'.$file->getClientOriginalExtension();
+            $file->move(public_path('uploads/biography-image'),$biography_photo);
+            $article['biography_photo'] = $biography_photo;
+        }
+        /* end image part */
+
+        $biography->title            = $request->title;
+        $biography->slug             = Str::slug($request->slug);
+        $biography->title_tag          = $request->title_tag;
+        $biography->relationship_status          = $request->relationship_status;
+        $biography->anniversary_date          = $request->anniversary_date;
+        $biography->birth_date          = $request->birth_date;
+        $biography->relationship_fact          = $request->relationship_fact;
+        $biography->more_about_relationship          = $request->more_about_relationship;
+        $biography->meta_title       = $request->meta_title;
+        $biography->meta_description = $request->meta_description;
+        $biography->update();
+
+        $biography->tags()->sync($request->input('tags', []));
+        return redirect()->route('admin.biography.index');
+    }
+
     public function insertQuickFact(Request $request){
 
         $quickFact = new QuickFact();

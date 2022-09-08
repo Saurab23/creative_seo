@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\QuickFact;
+use Carbon\Carbon;
 
 class Biography extends Model
 {
