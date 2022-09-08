@@ -22,6 +22,9 @@ Route::get('{slug}', 'FrontendController@viewDetail')->name('article.viewDetail'
 Route::get('/article-category/{slug}', 'FrontendController@category_wise_article')->name('article.category.view');
 
 Route::get('/biography/index', 'FrontendController@biographyIndex')->name('biography.index');
+Route::get('/biography/todays-anniversary', 'FrontendController@findTodayAnniversary')->name('biography.todaysAnniversary');
+Route::get('/biography/upcoming-anniversary', 'FrontendController@findUpcomingAnniversary')->name('biography.upcomingAnniversary');
+Route::get('/biography/{slug}', 'FrontendController@viewBiographyDetail')->name('biography.viewBiographyDetail');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/dashboard', 'HomeController@index')->name('home');

@@ -55,8 +55,8 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="section-header d-flex justify-content-between align-items-center">
-                                    <h3 class="section-title"><a href="#">Today's Anniversary</a></h3>
-                                    <h3 class="section-view-more"><a href="#">View More</a></h3>
+                                    <h3 class="section-title"><a href="{{ route('biography.todaysAnniversary') }}">Today's Anniversary</a></h3>
+                                    <h3 class="section-view-more"><a href="{{ route('biography.todaysAnniversary') }}">View More</a></h3>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                             <div class="col">
                                 <article class="blog-item mb-4">
                                     <div class="blog-item-thumb zoom image is-1by1">
-                                        <a href="">
+                                        <a href="{{ route('biography.viewBiographyDetail',$today->slug) }}">
                                             <img src="{{ (!empty($today->biography_photo))?url('uploads/biography-image/'.$today->biography_photo):url('uploads/biography-image/no-image.png') }}" alt="Conrad Hughes Hilton" class="img-fluid">
                                         </a>
                                         <div class="ribbon-item">
@@ -75,7 +75,7 @@
                                         </div>
                                     </div>
                                     <div class="blog-item-main text-center">
-                                        <h4 class="blog-item-title py-2"><a href="">{{$today->title}}</a></h4>
+                                        <h4 class="blog-item-title py-2"><a href="{{ route('biography.viewBiographyDetail',$today->slug) }}">{{$today->title}}</a></h4>
                                     </div>
                                 </article>
                             </div>
@@ -90,8 +90,8 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="section-header d-flex justify-content-between align-items-center">
-                                    <h3 class="section-title"><a href="#">Upcoming Anniversary</a></h3>
-                                    <h3 class="section-view-more"><a href="#">View More</a></h3>
+                                    <h3 class="section-title"><a href="{{ route('biography.upcomingAnniversary') }}">Upcoming Anniversary</a></h3>
+                                    <h3 class="section-view-more"><a href="{{ route('biography.upcomingAnniversary') }}">View More</a></h3>
                                 </div>
                             </div>
                         </div>
@@ -100,8 +100,8 @@
                             <div class="col">
                                 <article class="blog-item mb-4">
                                     <div class="blog-item-thumb zoom image is-1by1">
-                                        <a href="">
-                                            <img src="{{ (!empty($coming->biography_photo))?url('uploads/biography-image/'.$coming->biography_photo):url('uploads/biography-image/no-image.png') }}" alt="Conrad Hughes Hilton" class="img-fluid"> alt="" class="img-fluid">
+                                        <a href="{{ route('biography.viewBiographyDetail', $coming->slug) }}">
+                                            <img src="{{ (!empty($coming->biography_photo))?url('uploads/biography-image/'.$coming->biography_photo):url('uploads/biography-image/no-image.png') }}" alt="Conrad Hughes Hilton" class="img-fluid">
                                         </a>
                                         <div class="ribbon-item">
                                             <div class="ribbon-item-inner">
@@ -110,7 +110,7 @@
                                         </div>
                                     </div>
                                     <div class="blog-item-main text-center">
-                                        <h4 class="blog-item-title py-2"><a href="">{{$coming->title}}</a></h4>
+                                        <h4 class="blog-item-title py-2"><a href="{{ route('biography.viewBiographyDetail', $coming->slug) }}">{{$coming->title}}</a></h4>
                                     </div>
                                 </article>
                             </div>

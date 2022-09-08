@@ -46,6 +46,11 @@ class Biography extends Model
         return $this->belongsToMany(QuickFact::class);
     }
 
+    public function tableOfContent()
+    {
+        return $this->belongsToMany(TableOfContent::class);
+    }
+
     public function createdBy(){
         return $this->belongsTo(User::class,'created_by');
     }
