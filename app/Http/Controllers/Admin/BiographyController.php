@@ -56,6 +56,14 @@ class BiographyController extends Controller
            'relationship_fact'    =>    $request->relationship_fact,
            'more_about_relationship'    =>    $request->more_about_relationship,
            'biography_photo'     => $biography_photo,
+           'facebook_link'       => $request->facebook_link,
+           'twitter_link'       => $request->twitter_link,
+           'instagram_link'       => $request->instagram_link,
+           'tiktok_link'       => $request->tiktok_link,
+           'youtube_link'       => $request->youtube_link,
+           'imdb_link'       => $request->imdb_link,
+           'website_link'       => $request->website_link,
+           'twitch_link'       => $request->twitch_link,
            'meta_title'       => $request->meta_title,
            'meta_description' => $request->meta_description,
            'created_by'=>Auth::user()->id,
@@ -95,6 +103,14 @@ class BiographyController extends Controller
         $biography->birth_date          = $request->birth_date;
         $biography->relationship_fact          = $request->relationship_fact;
         $biography->more_about_relationship          = $request->more_about_relationship;
+        $biography->facebook_link       = $request->facebook_link;
+        $biography->twitter_link       = $request->twitter_link;
+        $biography->instagram_link       = $request->instagram_link;
+        $biography->tiktok_link       = $request->tiktok_link;
+        $biography->youtube_link       = $request->youtube_link;
+        $biography->imdb_link       = $request->imdb_link;
+        $biography->website_link       = $request->website_link;
+        $biography->twitch_link       = $request->twitch_link;
         $biography->meta_title       = $request->meta_title;
         $biography->meta_description = $request->meta_description;
         $biography->update();

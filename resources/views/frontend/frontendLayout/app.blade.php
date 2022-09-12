@@ -107,12 +107,13 @@
                         <li><a href="youtube.com"><i class="fa-brands fa-youtube"></i></a></li>
                     </ul>
                     <ul class="footer-menu d-flex justify-content-center align-items-center list-unstyled mb-3">
-                        <li><a href="">Home</a></li>
-                        <li><a href="">Married</a></li>
-                        <li><a href="">Dating</a></li>
-                        <li><a href="">Relationship</a></li>
-                        <li><a href="">Lifestyle</a></li>
-                        <li><a href="">Biography</a></li>
+                        @php 
+                            $cate = App\Category::all();
+                        @endphp
+                        @foreach($cate as $cat)
+                        <li><a href="{{ route('article.category.view',$cat->slug) }}">{{ $cat->category_name}}</a></li>
+                        @endforeach
+                        <li><a href="{{ route('biography.index') }}">Biography</a></li>
                     </ul>
                     <div class="footer-copyright text-center">
                         <p class="mb-0 text-muted">Copyright &copy; 2022 Blog Name. All Rights Reserved.</p>

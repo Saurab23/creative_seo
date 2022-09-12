@@ -20,7 +20,7 @@ class FrontendController extends Controller
     public function index()
     {
         
-        $articles = Article::with('articleUser')->latest('created_at')->get()->take(4);
+        $articles = Article::with('articleUser', 'tags')->latest('created_at')->get()->take(4);
         $categories = Category::all();
         $user = User::all();
         $biography = Biography::latest('created_at')->get();
@@ -28,6 +28,8 @@ class FrontendController extends Controller
 
         $today_anniversary = Biography::whereMonth('anniversary_date', '=', Carbon::now()->format('m'))->whereDay('anniversary_date', '=', Carbon::now()->format('d'))->get()->take(6);
         $upcoming_anniversary = DB::select("SELECT * FROM biographies  WHERE dayofyear(anniversary_date) - dayofyear(curdate()) between 1 and 10  or dayofyear(anniversary_date) + 365 - dayofyear(curdate()) between 1 and 10");
+
+        //dd($articles[0]->tags[0]);
 
         return view('frontend.article.index', compact('articles', 'categories', 'user', 'biography', 'today_anniversary', 'upcoming_anniversary'));
     
@@ -43,11 +45,14 @@ class FrontendController extends Controller
     public function viewDetail($slug)
     {
         // dd($slug);
-        $allArticle = Article::with('categories')->get();
+        $allArticle = Article::with('categories')->latest('created_at')->get()->take(6);
         $article = Article::where('slug', $slug)->with('categories', 'articleUser', 'tags')->first();
-        //$articles = Article::with('categories','tags')->get();
-        //dd($allArticle); 
-        return view('frontend.article.viewDetail', compact('article', 'allArticle'));
+
+        $category = Category::find(6)->articles()->orderBy('updated_at', 'desc')->get()->take(4);
+        $biography = Biography::latest('created_at')->get()->take(6);
+
+
+        return view('frontend.article.viewDetail', compact('article', 'allArticle', 'category', 'biography'));
     }
 
     public function biographyIndex(){
@@ -82,8 +87,11 @@ class FrontendController extends Controller
         $recent_biography = Biography::latest('created_at')->get();
         $sidebar_biography = Biography::latest('created_at')->get()->take(6);
 
+        //$category = Category::where('id', '6')->with('catArt')->first();
+        $category = Category::find(6)->articles()->orderBy('updated_at', 'desc')->get()->take(4);
         
-        return view('frontend.biography.biographyDetail', compact('biography', 'recent_biography', 'sidebar_biography'));
+        //dd($category);
+        return view('frontend.biography.biographyDetail', compact('biography', 'recent_biography', 'sidebar_biography', 'category'));
     }
 
 }

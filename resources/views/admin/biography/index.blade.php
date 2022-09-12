@@ -188,7 +188,7 @@
                             </td>
                             <td>
                                 @foreach($article->tags as $key => $item)
-                                    <span class="badge badge-info">{{ $item->tag_name }}</span>
+                                    <span class="badge badge-info ml-2 mt-2">{{ $item->tag_name }}</span>
                                 @endforeach
                             </td>
                             <td>

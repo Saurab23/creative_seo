@@ -11,19 +11,19 @@
             @csrf
             @method('PUT')
             <div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
-                <label for="title">Title*</label>
+                <label for="title"><strong>Title*</strong></label>
                 <input type="text" id="title" name="title" class="form-control" value="{{ old('title', isset($biography) ? $biography->title : '') }}">
             </div>
             <div class="form-group {{ $errors->has('slug') ? 'has-error' : '' }}">
-                <label for="title">Slug*</label>
+                <label for="title"><strong>Slug*</strong></label>
                 <input type="text" id="slug" name="slug" class="form-control" value="{{ old('title', isset($biography) ? $biography->slug : '') }}">
             </div>
             <div class="form-group {{ $errors->has('title_tag') ? 'has-error' : '' }}">
-                <label for="title_tag">Title tag*</label>
+                <label for="title_tag"><strong> Title tag*</strong></label>
                 <input type="text" id="title_tag" name="title_tag" class="form-control" value="{{ old('title', isset($biography) ? $biography->title_tag : '') }}">
             </div>
             <div class="form-group">
-                <label for="abroad">RelationShip Status:</label>
+                <label for="abroad"><strong>RelationShip Status:</strong></label>
                   <select class="form-control {{ $errors->has('abroad') ? 'is-invalid' : '' }}" name="relationship_status" id="relationship_status" value="{{old('health', $biography->relationship_status) }}"  required>
                   <option value disabled {{ old('relationship_status', null) === null ? 'selected' : '' }}>Please Select</option>
                   <option value="single" @if($biography->relationship_status == 'single') selected @endif >Single</option>
@@ -35,11 +35,11 @@
             </div>
 
             <div class="married box">
-                <label for="anniversary_date">Anniversary Date*</label>
+                <label for="anniversary_date"><strong>Anniversary Date*</strong></label>
                 <input type="date" id="anniversary_date" name="anniversary_date" class="form-control" value="{{ old('title', isset($biography) ? $biography->anniversary_date : '') }}">
             </div>
             <div class="form-group {{ $errors->has('birth_date') ? 'has-error' : '' }}">
-                <label for="birth_date">Birth Date*</label>
+                <label for="birth_date"><strong>Birth Date*</strong></label>
                 <input type="date" id="birth_date" name="birth_date" class="form-control" value="{{ old('title', isset($biography) ? $biography->birth_date : '') }}">
             </div>
             <div class="form-group">
@@ -51,7 +51,7 @@
                 <textarea class="ckeditor form-control" name="more_about_relationship">{{ $biography->more_about_relationship }}</textarea>
             </div>
             <div class="form-group">
-                <label>Biography Photo</label><span class="text-danger">*</span></label>
+                <label><strong>Biography Photo</strong></label><span class="text-danger">*</span></label>
                 <div class="col-sm-10">
                   <input type="file" name="biography_photo"><br>
                   <small>(Allowed Photo Types: jpg, jpeg, gif, png)</small><br>
@@ -64,7 +64,7 @@
                 </div>
               </div>
               <div class="form-group {{ $errors->has('tags') ? 'has-error' : '' }}">
-                <label for="permissions">Tags*
+                <label for="permissions"><strong> Tags*</strong>
                     <span class="btn btn-info btn-xs select-all">Select all</span>
                     <span class="btn btn-info btn-xs deselect-all">Deselect all</span></label>
                 <select name="tags[]" id="tags" class="form-control select2" multiple="multiple">
@@ -82,6 +82,38 @@
                 <p class="helper-block">
                     {{ trans('global.role.fields.permissions_helper') }}
                 </p>
+            </div>
+            <div class="form-group">
+                <label><strong>FaceBook link:</strong></label>
+                <input class="form-control" name="facebook_link" value="{{ old('title', isset($biography) ? $biography->facebook_link : '') }}">
+            </div>
+            <div class="form-group">
+                <label><strong>Twitter Link:</strong></label>
+                <input class="form-control" name="twitter_link" value="{{ old('title', isset($biography) ? $biography->twitter_link : '') }}">
+            </div>
+            <div class="form-group">
+                <label><strong>Instagram Link:</strong></label>
+                <input class="form-control" name="instagram_link" value="{{ old('title', isset($biography) ? $biography->instagram_link : '') }}">
+            </div>
+            <div class="form-group">
+                <label><strong>Tiktok link:</strong></label>
+                <input class="form-control" name="tiktok_link" value="{{ old('title', isset($biography) ? $biography->tiktok_link : '') }}">
+            </div>
+            <div class="form-group">
+                <label><strong>Youtube Link:</strong></label>
+                <input class="form-control" name="youtube_link" value="{{ old('title', isset($biography) ? $biography->youtube_link : '') }}">
+            </div>
+            <div class="form-group">
+                <label><strong>IMDB Link:</strong></label>
+                <input class="form-control" name="imdb_link" value="{{ old('title', isset($biography) ? $biography->imdb_link : '') }}">
+            </div>
+            <div class="form-group">
+                <label><strong>Official Website Link:</strong></label>
+                <input class="form-control" name="website_link" value="{{ old('title', isset($biography) ? $biography->website_link : '') }}">
+            </div>
+            <div class="form-group">
+                <label><strong>Twitch Link:</strong></label>
+                <input class="form-control" name="twitch_link" value="{{ old('title', isset($biography) ? $biography->twitch_link : '') }}">
             </div>
             <div class="form-group">
                 <label><strong>Meta Title:</strong></label>

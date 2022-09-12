@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Article;
 
 class Category extends Model
 {
@@ -30,6 +31,11 @@ class Category extends Model
     public function articles()
     {
         return $this->belongsToMany(Article::class);
+    }
+
+    public function catArt(){
+
+        return $this->belongsToMany(Article::class)->orderBy('updated_at', 'desc');
     }
 
 }

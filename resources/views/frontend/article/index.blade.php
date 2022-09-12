@@ -14,15 +14,15 @@
                                 <img src="{{ (!empty($article->featured_photo))?url('uploads/article-featured-image/'.$article->featured_photo):url('uploads/article-featured-image/no-image.png') }}" class="img-fluid" alt="Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!">
                             </a>
                             <div class="recent-post-item-cat">
-                                <a href="#">BFF Goals</a>
+                                <a href="#">{{ $article->tags[0]->tag_name }}</a> 
                             </div>
                         </div>
                         <div class="recent-post-item-main text-center pt-3 pb-2 px-4 pt-3 pb-2 px-4">
-                            <h4 class="recent-post-item-title"><a href="#">{{ $article->title}}</a></h4>
+                            <h4 class="recent-post-item-title"><a href="{{ route('article.viewDetail',$article->slug) }}">{{ $article->title}}</a></h4>
                             <div class="recent-post-item-meta">
                                 <span class="recent-post-item-meta-author">{{($article->articleUser!=null)?$article->articleUser->name:'N/A'}}</span>
                                 <i class="fa-solid fa-minus"></i>
-                                <span class="recent-post-item-meta-date">{{ $article->created_at}}</span>
+                                <span class="recent-post-item-meta-date">{{ $article->created_at->todatestring()}}</span>
                             </div>
 
                         </div>
@@ -140,7 +140,7 @@
                 <div class="col">
                     <article class="blog-item shadow mb-3">
                         <div class="blog-item-thumb zoom image is-1by1">
-                            <a href="">
+                            <a href="{{ route('biography.viewBiographyDetail',$bio->slug) }}">
                                 <img src="{{ (!empty($bio->biography_photo))?url('uploads/biography-image/'.$bio->biography_photo):url('uploads/biography-image/no-image.png') }}" alt="Conrad Hughes Hilton" class="img-fluid">
                             </a>
                             <div class="ribbon-item">
@@ -150,7 +150,7 @@
                             </div>
                         </div>
                         <div class="blog-item-main text-center text-center p-2">
-                            <h4 class="blog-item-title"><a href="">{{ $bio->title }}</a></h4>
+                            <h4 class="blog-item-title"><a href="{{ route('biography.viewBiographyDetail',$bio->slug) }}">{{ $bio->title }}</a></h4>
                             <p class="blog-item-age mb-0">{{ $bio->birth_date }}</p>
                         </div>
                     </article>

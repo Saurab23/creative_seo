@@ -77,70 +77,86 @@
                                                             <h3 class="stats">Social Media</h3>
                                                         </th>
                                                     </tr>
+                                                    @if (!empty($biography->facebook_link))
                                                     <tr>
                                                         <th>Facebook Profile/Page:</th>
                                                         <td>
-                                                            <a href="https://www.facebook.com" target="_blank" rel="nofollow">
+                                                            <a href="{{ $biography->facebook_link }}" target="_blank" rel="nofollow">
                                                                 <i class="fa-brands fa-facebook-f"></i>
                                                             </a>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if (!empty($biography->twitter_link))
                                                     <tr>
                                                         <th>Twitter Profile:</th>
                                                         <td>
-                                                            <a href="https://twitter.com" target="_blank" rel="nofollow">
+                                                            <a href="{{ $biography->twitter_link }}" target="_blank" rel="nofollow">
                                                                 <i class="fa-brands fa-twitter"></i>
                                                             </a>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if (!empty($biography->instagram_link))
                                                     <tr>
                                                         <th>Instagram Profile:</th>
                                                         <td>
-                                                            <a href="https://www.instagram.com/explore" target="_blank" rel="nofollow">
+                                                            <a href="{{ $biography->instagram_link }}" target="_blank" rel="nofollow">
                                                                 <i class="fa-brands fa-instagram"></i>
                                                             </a>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if (!empty($biography->tiktok_link))
                                                     <tr>
                                                         <th>Tiktok Profile:</th>
                                                         <td>
-                                                            <a href="https://tiktok.com/" target="_blank" rel="nofollow">
+                                                            <a href="{{ $biography->tiktok_link }}" target="_blank" rel="nofollow">
                                                                 <i class="fa-brands fa-tiktok"></i>
                                                             </a>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if (!empty($biography->youtube_link))
                                                     <tr>
                                                         <th>Youtube Profile:</th>
                                                         <td>
-                                                            <a href="https://www.youtube.com" target="_blank" rel="nofollow">
+                                                            <a href="{{ $biography->youtube_link }}" target="_blank" rel="nofollow">
                                                                 <i class="fa-brands fa-youtube"></i>
                                                             </a>
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <th>Wikipedia Profile:</th>
-                                                        <td>
-                                                            <a href="https://en.wikipedia.org/w/" target="_blank" rel="nofollow">
-                                                                <i class="fa-brands fa-wikipedia-w"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
+                                                    @endif
+                                                    @if (!empty($biography->imdb_link))
                                                     <tr>
                                                         <th>IMDB Profile:</th>
                                                         <td>
-                                                            <a href="https://www.imdb.com" target="_blank" rel="nofollow">
+                                                            <a href="{{ $biography->imdb_link }}" target="_blank" rel="nofollow">
                                                                 <i class="fa-brands fa-imdb"></i>
                                                             </a>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if (!empty($biography->website_link))
                                                     <tr>
                                                         <th>Official Website:</th>
                                                         <td>
-                                                            <a href="https://www.google.com/" target="_blank" rel="nofollow">
+                                                            <a href="{{ $biography->website_link }}" target="_blank" rel="nofollow">
                                                                 <i class="fa-solid fa-link"></i>
                                                             </a>
                                                         </td>
                                                     </tr>
+                                                    @endif
+                                                    @if (!empty($biography->twitch_link))
+                                                    <tr>
+                                                        <th>Twitch Profile:</th>
+                                                        <td>
+                                                            <a href="{{ $biography->twitch_link }}" target="_blank" rel="nofollow">
+                                                                <i class="fa-brands fa-twitch"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                    @endif
                                                     <tr>
                                                         <td colspan="2">
                                                             <a href="#" class="viewmore">View more / View fewer</a>
@@ -211,7 +227,7 @@
                             <a href="#" class="btn btn-outline-danger">{{ $tags->tag_name }}</a>
                         @endforeach
                     </div>
-                    <section class="blog-biography-related-post blog-sidebar-cat py-3">
+                    {{-- <section class="blog-biography-related-post blog-sidebar-cat py-3">
                         <div class="section-header">
                             <h3 class="section-title">Recent Post on <span>{{ $biography->title }}</span></h3>
                         </div>
@@ -229,7 +245,7 @@
                                 </div>
                             </article>
                         </div>
-                    </section>
+                    </section> --}}
                 </div>
                 <div class="co1-12 col-sm-12 col-md-12 col-lg-4">
                     <div id="rightSidebar" class="sidebar-section right-sidebar">
@@ -239,18 +255,21 @@
                                     <h3 class="section-title">Entertainment</h3>
                                 </div>
                                 <div class="blog-sidebar-cat-list">
+                                    @foreach($category as $articles)
+
                                     <article class="blog-sidebar-cat-content d-flex mb-4">
                                         <div class="blog-sidebar-cat-thumb zoom">
-                                            <img src="./img/Brooklyn-Beckham.jpg" alt="Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!" class="img-fluid">
+                                            <img src="{{ (!empty($articles->featured_photo))?url('uploads/article-featured-image/'.$articles->featured_photo):url('uploads/article-featured-image/no-image.png') }}" alt="Conrad Hughes Hilton" class="img-fluid">
                                         </div>
                                         <div class="blog-sidebar-cat-main">
-                                            <h4 class="blog-sidebar-cat-title"><a href="">Brooklyn Beckham Talks About His Dream Of Becoming A Young Dad!</a></h4>
+                                            <h4 class="blog-sidebar-cat-title"><a href="{{ route('article.viewDetail',$articles->slug) }}">{{ $articles->title}}</a></h4>
                                             <div class="blog-sidebar-cat-meta">
-                                                <span class="blog-sidebar-cat-meta-author me-2"><i class="fa-solid fa-user me-1"></i>admin</span>
-                                                <span class="blog-sidebar-cat-meta-date"><i class="fa-solid fa-clock me-1"></i>August 15, 2022</span>
+                                                <span class="blog-sidebar-cat-meta-author me-2"><i class="fa-solid fa-user me-1"></i>{{ ($articles->articleUser!=null)?$articles->articleUser->name:'N/A'}}</span>
+                                                <span class="blog-sidebar-cat-meta-date"><i class="fa-solid fa-clock me-1"></i>{{ $articles->updated_at}}</span>
                                             </div>
                                         </div>
                                     </article>
+                                    @endforeach
                                 </div>
                             </section>
                             <section class="blog-sidebar-biography pb-4">
