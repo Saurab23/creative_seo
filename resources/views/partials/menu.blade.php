@@ -92,6 +92,14 @@
                     </a>
                 </li>
             @endcan
+                <li class="nav-item">
+                    <a href="{{ route("admin.subscription.index") }}" class="nav-link {{ request()->is('admin/subscription') || request()->is('admin/subscription/*') ? 'active' : '' }}">
+                        <i class="fa-fw fas fa-briefcase nav-icon">
+
+                        </i>
+                        Subscription
+                    </a>
+                </li>
             @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
                 @can('profile_password_edit')
                     <li class="nav-item">

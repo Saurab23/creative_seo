@@ -26,6 +26,8 @@ Route::get('/biography/todays-anniversary', 'FrontendController@findTodayAnniver
 Route::get('/biography/upcoming-anniversary', 'FrontendController@findUpcomingAnniversary')->name('biography.upcomingAnniversary');
 Route::get('/biography/{slug}', 'FrontendController@viewBiographyDetail')->name('biography.viewBiographyDetail');
 
+Route::post('/saveSubscription', 'FrontendController@saveSubscription')->name('saveSubscription');
+
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/dashboard', 'HomeController@index')->name('home');
     // Permissions
@@ -66,7 +68,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
      Route::post('biography/tableofContent/delete', 'BiographyController@TableOfContentsDelete')->name('biography.tableofContent.delete');
      Route::post('biography/inserttableofContent', 'BiographyController@insertTableOfContent')->name('biography.inserttableofContent');
      
-
+    //subscription
+    Route::delete('subscription/destroy', 'SubscriptionController@massDestroy')->name('subscription.massDestroy');
+    Route::resource('subscription', 'SubscriptionController');
     
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {

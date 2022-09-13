@@ -14,6 +14,7 @@ use App\Tag;
 use App\Biography;
 use App\TableOfContent;
 use App\QuickFact;
+use App\Subscription;
 
 class FrontendController extends Controller
 {
@@ -92,6 +93,16 @@ class FrontendController extends Controller
         
         //dd($category);
         return view('frontend.biography.biographyDetail', compact('biography', 'recent_biography', 'sidebar_biography', 'category'));
+    }
+
+    public function saveSubscription(Request $request){
+
+
+        $subscription = Subscription::create([
+            'email'            => $request->email,
+        ]);
+
+        return redirect()->back()->with('success', 'Successfully Subscribed.'); 
     }
 
 }

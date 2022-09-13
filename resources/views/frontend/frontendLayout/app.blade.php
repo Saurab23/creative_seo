@@ -92,12 +92,15 @@
                     <div class="home-newsletter mb-3">
                         <div class="single">
                             <h2>Subscribe to our Newsletter</h2>
-                            <div class="input-group">
-                                <input type="email" class="form-control" placeholder="Enter your email">
-                                <span class="input-group-btn">
-                             <button class="btn btn-theme" type="submit">Subscribe</button>
-                             </span>
-                            </div>
+                            <form method="POST" action="{{ route('saveSubscription') }}" class="application-form volunteer-application-form mb-3 p-4">
+                                @csrf
+                                <div class="input-group">
+                                    <input type="email" class="form-control" name="email" placeholder="Enter your email">
+                                    <span class="input-group-btn">
+                                <button class="btn btn-theme" type="submit">Subscribe</button>
+                                </span>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <ul class="footer-social d-flex justify-content-center align-items-center list-unstyled mb-3">
