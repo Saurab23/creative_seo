@@ -41,7 +41,7 @@
             <form id='create' action="" enctype="multipart/form-data" method="post" accept-charset="utf-8" class="needs-validation" novalidate>
                 <div class="form-row">
                     <div id="status"></div>
-                    <input type="text"  class="form-control" id="articleid" name="articleid" value="" placeholder="" hidden required>
+                    <input type="text"  class="form-control" id="articleid" name="articleid" value="" placeholder="" required>
                     <div class="form-group col-md-12 col-sm-12">
                         <label for=""> Title <span style="color:red">*</span> </label>
                         <input type="text"  class="form-control" id="title" name="title" value="" placeholder="" required>
@@ -244,6 +244,8 @@
      $(document).ready(function () {
         $('#myModal').on('show.bs.modal', function (event) {
             var myVal = $(event.relatedTarget).data('val');
+
+            //alert(myVal);
             $(this).find(".articleid").val(myVal);
   $("#articleid").val(myVal);
 
@@ -311,9 +313,7 @@ function submitQuickFact() {
 }
 </script>
 <script type="text/javascript">
-
     $(document).ready(function () {
-       
     $("#manage_all").on("click", ".delete", function () {
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
             var id = $(this).attr('id');
@@ -335,6 +335,33 @@ function submitQuickFact() {
    
     });
 </script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+    $("#manage_all").on("click", ".edit", function () {
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            var id = $(this).attr('id');
+      
+                $.ajax({
+                    url: "{{ route('admin.biography.quickfact.edit') }}",
+                    data: {"_token": CSRF_TOKEN,'id':id},
+                   
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function(res) {
+                    
+                        $('[name="title"]').val(res.title);
+                        $('[name="content"]').val(res.content);
+                    
+                    }
+                });
+            
+        });
+   
+    });
+</script>
+
+
 
 {{-- quickfacts ko scripts end --}}
 
@@ -432,6 +459,31 @@ function submitTableOfContent() {
        });
   
    });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+    $("#manage_all1").on("click", ".edit", function () {
+            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+            var id = $(this).attr('id');
+      
+                $.ajax({
+                    url: "{{ route('admin.biography.tableofContent.edit') }}",
+                    data: {"_token": CSRF_TOKEN,'id':id},
+                   
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function(res) {
+                    
+                        $('[name="question"]').val(res.question);
+                        $('[name="answer"]').val(res.answer);
+                    
+                    }
+                });
+            
+        });
+   
+    });
 </script>
 
 {{-- table of content ko scripts end --}}

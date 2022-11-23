@@ -60,11 +60,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
      //Biography Quick Facts
      Route::get('biography/quickfacts/{id}', 'BiographyController@QuickFacts')->name('biography.quickfact');
+     Route::post('biography/quickfact/edit', 'BiographyController@QuickFactsEdit')->name('biography.quickfact.edit');
      Route::post('biography/quickfact/delete', 'BiographyController@QuickFactsDelete')->name('biography.quickfact.delete');
      Route::post('biography/insertQuickFact', 'BiographyController@insertQuickFact')->name('biography.insertQuickFact');
 
     //Biography Table Of Content
      Route::get('biography/tableofContent/{id}', 'BiographyController@TableOfContents')->name('biography.tableofContent');
+     Route::post('biography/tableofContent/edit', 'BiographyController@TableOfContentsEdit')->name('biography.tableofContent.edit');
      Route::post('biography/tableofContent/delete', 'BiographyController@TableOfContentsDelete')->name('biography.tableofContent.delete');
      Route::post('biography/inserttableofContent', 'BiographyController@insertTableOfContent')->name('biography.inserttableofContent');
      

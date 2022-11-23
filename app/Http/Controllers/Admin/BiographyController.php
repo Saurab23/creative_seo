@@ -138,8 +138,9 @@ class BiographyController extends Controller
         return Datatables::of($quickFact)
         ->addColumn('action', function ($user) {
             $html = '<div class="btn-group">';
-            $html .= '<a data-toggle="tooltip" href="#" id="' . $user->id . '" class="btn btn-xs btn-info mr-1 delete" title="delete"><i class="fa fa-trash"></i> </a>';
-
+            $html .= '<a data-toggle="tooltip" href="#" id="' . $user->id . '" class="btn btn-xs btn-info mr-1 edit" title="edit"><i class="fa fa-pencil-square-o"></i> </a>';
+            $html .= '<a data-toggle="tooltip" href="#" id="' . $user->id . '" class="btn btn-xs btn-info ml-2 delete" title="delete"><i class="fa fa-trash"></i> </a>';
+            
             $html .= '</div>';
             return $html;
         })
@@ -153,6 +154,12 @@ class BiographyController extends Controller
         $quickFact = QuickFact::where('id', $request->get('id'))->first();
         $quickFact->delete();
         return response()->json(['type' => 'success', 'message' => "Successfully Deleted"]);
+    }
+
+    public function QuickFactsEdit(Request $request){
+       
+        $quickFact = QuickFact::where('id', $request->get('id'))->first();
+        return response()->json($quickFact);
     }
 
     public function insertTableOfContent(Request $request){
@@ -173,6 +180,7 @@ class BiographyController extends Controller
         return Datatables::of($tableOfContent)
         ->addColumn('action', function ($user) {
             $html = '<div class="btn-group">';
+            $html .= '<a data-toggle="tooltip" href="#" id="' . $user->id . '" class="btn btn-xs btn-info mr-1 edit" title="edit"><i class="fa fa-pencil-square-o"></i> </a>';
             $html .= '<a data-toggle="tooltip" href="#" id="' . $user->id . '" class="btn btn-xs btn-info mr-1 delete" title="delete"><i class="fa fa-trash"></i> </a>';
 
             $html .= '</div>';
@@ -188,5 +196,11 @@ class BiographyController extends Controller
         $tableOfContent = TableOfContent::where('id', $request->get('id'))->first();
         $tableOfContent->delete();
         return response()->json(['type' => 'success', 'message' => "Successfully Deleted"]);
+    }
+
+    public function TableOfContentsEdit(Request $request){
+       
+        $tableOfContent = TableOfContent::where('id', $request->get('id'))->first();
+        return response()->json($tableOfContent);
     }
 }
