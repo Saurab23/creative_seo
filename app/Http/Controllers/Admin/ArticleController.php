@@ -48,6 +48,25 @@ class ArticleController extends Controller
     //     return redirect()->route('admin.article.index');
     // }
 
+    public function uploadImage(Request $request)
+    {
+        if ($request->hasFile('upload')) {
+            $file = $request->file('upload');
+            $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $fileName = $fileName . '_' . time() . '.' . $file->getClientOriginalExtension();
+        
+            $file->move(public_path('uploads/article-content-images'), $fileName);
+   
+            $ckeditor = $request->input('CKEditorFuncNum');
+            $url = asset('uploads/article-content-images/' . $fileName); 
+            $msg = 'Image uploaded successfully'; 
+            $response = "<script>window.parent.CKEDITOR.tools.callFunction($ckeditor, '$url', '$msg')</script>";
+               
+            @header('Content-type: text/html; charset=utf-8'); 
+            return $response;
+        }
+    }
+
     public function store(Request $request){
 
 

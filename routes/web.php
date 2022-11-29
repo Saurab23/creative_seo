@@ -73,6 +73,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     //subscription
     Route::delete('subscription/destroy', 'SubscriptionController@massDestroy')->name('subscription.massDestroy');
     Route::resource('subscription', 'SubscriptionController');
+
+    Route::post('articleContent/uploadImage', 'ArticleController@uploadImage')->name('articleContent.uploadImage');
+
     
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {
@@ -83,3 +86,5 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 
     }
 
 });
+
+

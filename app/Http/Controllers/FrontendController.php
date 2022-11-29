@@ -82,10 +82,11 @@ class FrontendController extends Controller
     public function viewBiographyDetail($slug)
     {
         $biography = Biography::where('slug', $slug)->first();
-        $biography->tableofcontent = TableOfContent::where('biography_id',$biography->id)->get();
-        $biography->quickfact = QuickFact::where('biography_id',$biography->id)->get();
+        $biography->tableofcontent = TableOfContent::where('biography_id',$biography->id)->orderBy('seq_no', 'asc')->get();
+        $biography->quickfact = QuickFact::where('biography_id',$biography->id)->orderBy('seq_no', 'asc')->get();
 
-        $recent_biography = Biography::latest('created_at')->get();
+        $recent_biography = Biography::latest('created_at')->get(); 
+        //dd($recent_biography[0]->birth_date);
         $sidebar_biography = Biography::latest('created_at')->get()->take(6);
 
         //$category = Category::where('id', '6')->with('catArt')->first();

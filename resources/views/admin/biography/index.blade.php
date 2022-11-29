@@ -29,7 +29,7 @@
                         <table id="manage_all" class=" table table-bordered table-striped table-hover datatable">
                             <thead>
                                 <tr>
-                                    <th>S.No</th>
+                                    <th>Order Sequence</th>
                                     <th>Title</th>
                                     <th>Content</th>
                                     <th>Action</th>
@@ -41,7 +41,14 @@
             <form id='create' action="" enctype="multipart/form-data" method="post" accept-charset="utf-8" class="needs-validation" novalidate>
                 <div class="form-row">
                     <div id="status"></div>
-                    <input type="text"  class="form-control" id="articleid" name="articleid" value="" placeholder="" required>
+                   
+                    <input type="text"  class="form-control" id="articleid" name="articleid" value="" placeholder="" hidden required>
+                    <input type="text"  class="form-control" id="qf_id" name="qf_id" value="0" placeholder=""  hidden required>
+                    <div class="form-group col-md-12 col-sm-12">
+                        <label for=""> Order Sequence <span style="color:red">*</span> </label>
+                        <input type="number"  class="form-control" id="seq_no" name="seq_no" value="" placeholder="" required>
+                        <span id="error_name" class="has-error"></span>
+                    </div>
                     <div class="form-group col-md-12 col-sm-12">
                         <label for=""> Title <span style="color:red">*</span> </label>
                         <input type="text"  class="form-control" id="title" name="title" value="" placeholder="" required>
@@ -92,7 +99,7 @@
                         <table id="manage_all1" class=" table table-bordered table-striped table-hover datatable">
                             <thead>
                                 <tr>
-                                    <th>S.No</th>
+                                    <th>Order Sequence</th>
                                     <th>Question</th>
                                     <th>Action</th>
                                 </tr>
@@ -104,6 +111,12 @@
                 <div class="form-row">
                     <div id="status"></div>
                     <input type="text"  class="form-control" id="articleid" name="articleid" value="" placeholder="" hidden required>
+                    <input type="text"  class="form-control" id="toc_id" name="toc_id" value="0" placeholder=""  hidden required>
+                    <div class="form-group col-md-12 col-sm-12">
+                        <label for=""> Order Sequence <span style="color:red">*</span> </label>
+                        <input type="number"  class="form-control" id="seq_no" name="seq_no" value="" placeholder="" required>
+                        <span id="error_name" class="has-error"></span>
+                    </div>
                     <div class="form-group col-md-12 col-sm-12">
                         <label for=""> Question <span style="color:red">*</span> </label>
                         <input type="text"  class="form-control" id="question" name="question" value="" placeholder="" required>
@@ -264,10 +277,9 @@
             },
        
             columns: [
-                {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
+                {data: 'seq_no', name: 'seq_no'},
                 {data: 'title', name: 'title'},
                 {data: 'content', name: 'content'},
-                
                 {data: 'action', name: 'action'}
             ],
             "autoWidth": false,
@@ -286,13 +298,17 @@ function submitQuickFact() {
    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
    var articleId = $('#articleid').val();
    //alert(articleId);
+   var seq_no = $('#seq_no').val();
    var title = $('#title').val();
+   var qfid = $("#qf_id").val();
    var content = $('#content').val();
     //             // myData.append('_token', CSRF_TOKEN);
     //             alert(JSON.stringify(myData));
                 var myData = {
                     '_token' : CSRF_TOKEN,
+                    'qf_id' : qfid,
                     'articleid' : articleId,
+                    'seq_no': seq_no,
                     'title' : title,
                     'content' : content,
                 };
@@ -303,6 +319,7 @@ function submitQuickFact() {
         type: 'post',
         success: function()
         {
+            $('[name="seq_no"]').val('');
             $('[name="title"]').val('');
             $('[name="content"]').val('');
             table = $("#manage_all").DataTable();
@@ -349,7 +366,8 @@ function submitQuickFact() {
                     type: 'POST',
                     dataType: 'json',
                     success: function(res) {
-                    
+                        $('[name="qf_id"]').val(id);
+                        $('[name="seq_no"]').val(res.seq_no);
                         $('[name="title"]').val(res.title);
                         $('[name="content"]').val(res.content);
                     
@@ -389,7 +407,7 @@ function submitQuickFact() {
            },
       
            columns: [
-               {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false},
+               {data: 'seq_no', name: 'seq_no'},
                {data: 'question', name: 'answer'},               
                {data: 'action', name: 'action'}
            ],
@@ -408,7 +426,9 @@ function submitTableOfContent() {
    // var myData = new FormData($("#create")[0]);
   var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
   var articleId = $('#articleid').val();
-  var question = $('#question').val();  
+  var seq_no = $('#seq_no').val();
+  var question = $('#question').val(); 
+  var tocid = $("#toc_id").val(); 
   var answer = CKEDITOR.instances['answer'].getData();
 
    //             // myData.append('_token', CSRF_TOKEN);
@@ -416,8 +436,10 @@ function submitTableOfContent() {
                var myData = {
                    '_token' : CSRF_TOKEN,
                    'articleid' : articleId,
+                   'seq_no' : seq_no,
                    'question' : question,
                    'answer' : answer,
+                   'toc_id' : tocid,
                };
             
    $.ajax({ 
@@ -426,6 +448,8 @@ function submitTableOfContent() {
        type: 'post',
        success: function()
        {
+        $('[name="toc_id"]').val('');
+            $('[name="seq_no"]').val('');
            $('[name="question"]').val('');
            CKEDITOR.instances.answer.setData(''); 
            table = $("#manage_all1").DataTable();
@@ -474,9 +498,13 @@ function submitTableOfContent() {
                     type: 'POST',
                     dataType: 'json',
                     success: function(res) {
-                    
+                        $('[name="toc_id"]').val(id);
+                        $('[name="seq_no"]').val(res.seq_no);
                         $('[name="question"]').val(res.question);
-                        $('[name="answer"]').val(res.answer);
+                        CKEDITOR.instances.answer.setData( res.answer, function()
+                        {
+                            this.checkDirty();  // true
+                        });
                     
                     }
                 });

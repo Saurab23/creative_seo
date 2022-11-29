@@ -30,6 +30,9 @@
                             Slug
                         </th>
                         <th>
+                            Status
+                        </th>
+                        <th>
                             Actions
                         </th>
                     </tr>
@@ -47,6 +50,17 @@
                             </td>
                             <td>
                                 {{ $cat->slug}}
+                            </td>
+                            <td>
+                                @php
+                                 $status = $cat->status;
+                                @endphp
+                                @if($status == 0)
+                                  <span class="badge btn-warning p-1">Hide</span>
+                                @endif
+                                @if($status == 1)
+                                  <span class="badge btn-primary p-1">Show</span>
+                                @endif
                             </td>
                             <td>
                                 @can('category_show')

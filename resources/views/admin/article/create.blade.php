@@ -76,7 +76,7 @@
              </div>
             <div class="form-group">
                 <label><strong>Content :</strong></label>
-                <textarea class="ckeditor form-control" name="content"></textarea>
+                <textarea name="content" id="content"></textarea>
             </div>
             <div class="form-group">
                 <label>Featured Photo</label><span class="text-danger">*</span></label>
@@ -99,17 +99,14 @@
         </form>
     </div>
 </div>
-
-@endsection
-<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-       $('.ckeditor').ckeditor();
+<script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+<script>
+    //OLD CONFIG
+    CKEDITOR.replace('content', {
+        filebrowserUploadUrl: "{{route('admin.articleContent.uploadImage', ['_token' => csrf_token() ])}}",
+        filebrowserUploadMethod: 'form'
     });
 </script>
-<script type="text/javascript">
-    $(function () {
-        $('#datetimepicker1').datetimepicker();
-    });
- </script>
+@endsection
+
   

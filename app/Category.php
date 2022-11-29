@@ -23,6 +23,7 @@ class Category extends Model
         'slug',
         'meta_title',
         'meta_description',
+        'status',
         'created_at',
         'updated_at',
         'deleted_at',

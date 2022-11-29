@@ -31,7 +31,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent navigation-main">
                 <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                     @php 
-                    $cate = App\Category::all();
+                    $cate = App\Category::where('status', '=', 1)->orderBy('created_at', 'asc')->get(); 
                     @endphp
                     @foreach($cate as $cat)
                     <li class="nav-item">

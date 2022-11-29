@@ -50,6 +50,14 @@
                 <span class="help-block">{{ trans('cruds.subject.fields.subject_name_helper') }}</span>
             </div>
             <div class="form-group">
+                <label class="required" for="meta_description">Status</label>
+                <select name="status" class="form-control select2">
+                    <option> -- Select Status-- </option>
+                    <option value="1">Show</option>
+                    <option value="0">Hide</option>
+                  </select>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

@@ -51,6 +51,14 @@
                 <span class="help-block">{{ trans('cruds.subject.fields.subject_name_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="title">Status*</label>
+                <select id="status"  name="status" class="form-control">
+                    <option value="">--Select Status--</option>
+                    <option {{ ($category->status) == '1' ? 'selected' : '' }}  value="1">Show</option>
+                    <option {{ ($category->status) == '0' ? 'selected' : '' }}  value="0">Hide</option>
+                  </select>
+              </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

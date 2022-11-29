@@ -20,6 +20,7 @@ class TableOfContent extends Model
     protected $fillable = [
         'question',
         'answer',
+        'seq_no',
         'biography_id',
         'created_at',
         'updated_at',

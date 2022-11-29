@@ -66,18 +66,13 @@
                     {{ trans('global.role.fields.permissions_helper') }}
                 </p>
             </div>
-            <div class="form-group">
-                <label><strong>Publish Date :</strong></label>
-                <div class='input-group date' id='datetimepicker1'>
-                   <input type="date" class="form-control"  value="{{ $article->news_date }}" />
-                   <span class="input-group-addon">
-                   <span class="glyphicon glyphicon-calendar"></span>
-                   </span>
-                </div>
-             </div>
+            <div class="form-group {{ $errors->has('posted_date') ? 'has-error' : '' }}">
+                <label for="posted_date"><strong>Publish Date*</strong></label>
+                <input type="date" id="posted_date" name="posted_date" class="form-control" value="{{ old('posted_date', isset($article) ? $article->posted_date : '') }}">
+            </div>
              <div class="form-group">
                 <label><strong>Content :</strong></label>
-                <textarea class="ckeditor form-control" name="content">{{ $article->content }}</textarea>
+                <textarea id="content" name="content">{{ $article->content }}</textarea>
             </div>
             <div class="form-group">
                 <label>Featured Photo</label><span class="text-danger">*</span></label>
@@ -106,17 +101,12 @@
         </form>
     </div>
 </div>
-
-@endsection
-
-<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-       $('.ckeditor').ckeditor();
+<script src="https://cdn.ckeditor.com/4.13.1/standard/ckeditor.js"></script>
+<script>
+    //OLD CONFIG
+    CKEDITOR.replace('content', {
+        filebrowserUploadUrl: "{{route('admin.articleContent.uploadImage', ['_token' => csrf_token() ])}}",
+        filebrowserUploadMethod: 'form'
     });
 </script>
-<script type="text/javascript">
-    $(function () {
-        $('#datetimepicker1').datetimepicker();
-    });
- </script>
+@endsection

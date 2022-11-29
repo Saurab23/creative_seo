@@ -20,6 +20,7 @@ class QuickFact extends Model
     protected $fillable = [
         'title',
         'content',
+        'seq_no',
         'biography_id',
         'created_at',
         'updated_at',

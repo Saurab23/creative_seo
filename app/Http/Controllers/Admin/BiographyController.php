@@ -121,11 +121,16 @@ class BiographyController extends Controller
 
     public function insertQuickFact(Request $request){
 
+        $id =  $request->input('qf_id');
+        if($id != 0)
+        $quickFact = QuickFact::find($id);
+        else
         $quickFact = new QuickFact();
 
         $quickFact->biography_Id = $request->input('articleid');
         $quickFact->title = $request->input('title');
         $quickFact->content = $request->input('content');
+        $quickFact->seq_no = $request->input('seq_no');
         $quickFact->save();
 
     }
@@ -133,7 +138,7 @@ class BiographyController extends Controller
     public function QuickFacts($id)
     {
 
-        $quickFact= QuickFact::where('biography_id', $id)->get();
+        $quickFact= QuickFact::where('biography_id', $id)->orderBy('seq_no', 'asc')->get();
         
         return Datatables::of($quickFact)
         ->addColumn('action', function ($user) {
@@ -164,8 +169,14 @@ class BiographyController extends Controller
 
     public function insertTableOfContent(Request $request){
 
+        $id =  $request->input('toc_id');
+        if($id != 0)
+        $tableOfContent = TableOfContent::find($id);
+        else
+
         $tableOfContent = new TableOfContent();
         $tableOfContent->biography_Id = $request->input('articleid');
+        $tableOfContent->seq_no = $request->input('seq_no');
         $tableOfContent->question = $request->input('question');
         $tableOfContent->answer = $request->input('answer');
         $tableOfContent->save();
@@ -175,7 +186,7 @@ class BiographyController extends Controller
     public function TableOfContents($id)
     {
 
-        $tableOfContent= TableOfContent::where('biography_id', $id)->get();
+        $tableOfContent= TableOfContent::where('biography_id', $id)->orderBy('seq_no', 'asc')->get();
         
         return Datatables::of($tableOfContent)
         ->addColumn('action', function ($user) {

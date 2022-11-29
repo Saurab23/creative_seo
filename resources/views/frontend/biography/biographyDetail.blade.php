@@ -15,7 +15,7 @@
                             </ol>
                         </nav>
                         <h2 class="blog-single-post-title lh-1">{{ $biography->title }}<span class="text-muted opacity-25 ps-2 ps-2">Biography<i class="fa-solid fa-circle-check ps-2"></i></span></h2>
-                        <h5 class="blog-single-post-subtitle text-muted opacity-50 lh-1">(Actor)</h5>
+                        <h5 class="blog-single-post-subtitle text-muted opacity-50 lh-1">{{ $biography->title_tag }}</h5>
                         <div class="blog-single-post-meta mb-4">
                             <span class="blog-single-post-meta-date">
                                 Posted on&nbsp;<span>{{ $biography->updated_at }}</span>
@@ -331,7 +331,7 @@
                             <div class="blog-item-main text-center text-center p-2">
                                 <h4 class="blog-item-title"><a href="{{ route('biography.viewBiographyDetail', $recent->slug) }}">{{ $recent->title }}</a></h4>
                                 @php
-                                    $birthday = $biography->birth_date;
+                                    $birthday = $recent->birth_date;
                                     $age = Carbon\Carbon::parse($birthday)->diff(Carbon\Carbon::now())->format('%y years');
                                 @endphp
                                 <p class="blog-item-age mb-0">{{ $age }}</p>
