@@ -499,7 +499,7 @@ function submitTableOfContent() {
                     dataType: 'json',
                     success: function(res) {
                         $('[name="toc_id"]').val(id);
-                        $('[name="seq_no"]').val(res.seq_no);
+                        $('[name="t_seq_no"]').val(res.seq_no);
                         $('[name="question"]').val(res.question);
                         CKEDITOR.instances.answer.setData( res.answer, function()
                         {
