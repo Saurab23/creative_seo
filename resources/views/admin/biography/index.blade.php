@@ -114,7 +114,7 @@
                     <input type="text"  class="form-control" id="toc_id" name="toc_id" value="0" placeholder=""  hidden required>
                     <div class="form-group col-md-12 col-sm-12">
                         <label for=""> Order Sequence <span style="color:red">*</span> </label>
-                        <input type="number"  class="form-control" id="seq_no" name="seq_no" value="" placeholder="" required>
+                        <input type="number"  class="form-control" id="t_seq_no" name="t_seq_no" value="" placeholder="" required>
                         <span id="error_name" class="has-error"></span>
                     </div>
                     <div class="form-group col-md-12 col-sm-12">
@@ -426,7 +426,7 @@ function submitTableOfContent() {
    // var myData = new FormData($("#create")[0]);
   var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
   var articleId = $('#articleid').val();
-  var seq_no = $('#seq_no').val();
+  var seq_no = $('#t_seq_no').val();
   var question = $('#question').val(); 
   var tocid = $("#toc_id").val(); 
   var answer = CKEDITOR.instances['answer'].getData();
@@ -449,7 +449,7 @@ function submitTableOfContent() {
        success: function()
        {
         $('[name="toc_id"]').val('');
-            $('[name="seq_no"]').val('');
+            $('[name="t_seq_no"]').val('');
            $('[name="question"]').val('');
            CKEDITOR.instances.answer.setData(''); 
            table = $("#manage_all1").DataTable();
